@@ -51,20 +51,14 @@ input_encoded = encoder.transform(input_data_categorical)
 # Convertir a un formato numérico para el modelo
 input_encoded = np.array(input_encoded).reshape(1, -1)
 
-
-# Concatenar las matrices, agregando 'housing_binary' directamente
+# Concatenar las matrices agregando 'housing_binary' directamente. Si no se hace así, habrá problemas de tamaño de matriz diferente
 input_final = np.hstack((input_encoded, input_data_continuous))
 
 # Imprimir la forma final después de la concatenación
 st.write(f"Dimensiones de input_final después de la concatenación: {input_final.shape}")
-
-
-# Concatenar la variable 'housing' que no ha pasado por el encoder con las variables codificadas
-#input_final = np.hstack((input_encoded, input_data_continuous))
 
 # Realizar la predicción
 prediction = model.predict(input_final)
 
 # Mostrar la predicción
 st.write(f'Predicción de la aceptación del depósito: {"Yes" if prediction[0] == 1 else "No"}')
-
