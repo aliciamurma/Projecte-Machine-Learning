@@ -51,12 +51,19 @@ input_encoded = encoder.transform(input_data_categorical)
 # Convertir a un formato numérico para el modelo
 input_encoded = np.array(input_encoded).reshape(1, -1)
 
+# Verificar las dimensiones de las matrices antes de concatenarlas
+st.write(f"Dimensiones de input_encoded: {input_encoded.shape}")
+st.write(f"Dimensiones de input_data_continuous: {input_data_continuous.shape}")
+
+# Concatenar las matrices solo si las dimensiones coinciden
+if input_encoded.shape[1] == input_data_continuous.shape[1]:
+    input_final = np.hstack((input_encoded, input_data_continuous))
+    st.write(f"Dimensiones de input_final después de la concatenación: {input_final.shape}")
+else:
+    st.error("Las dimensiones de las matrices no coinciden. No se puede realizar la concatenación.")
+
 # Concatenar la variable 'housing' que no ha pasado por el encoder con las variables codificadas
 input_final = np.hstack((input_encoded, input_data_continuous))
-
-# La variable objetivo está en bool
-def convert_back_to_labels(arr):
-    return ['yes' if x == 1 else 'no' for x in arr]
 
 # Realizar la predicción
 prediction = model.predict(input_final)
