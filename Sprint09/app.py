@@ -1,6 +1,7 @@
 import streamlit as st
 import pickle
 import pandas as pd
+import numpy as np
 
 # Cargar el modelo y el escalador desde archivos
 with open('model.pkl', 'rb') as model_file:
