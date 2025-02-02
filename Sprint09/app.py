@@ -63,8 +63,8 @@ st.write(f"Dimensiones de input_final después de la concatenación: {input_fina
 #input_final = np.hstack((input_encoded, input_data_continuous))
 
 # Realizar la predicción
-#prediction = model.predict(input_final)
+prediction = model.predict(input_final)
 
 # Mostrar la predicción
-#st.write(f'Predicción de la aceptación del depósito: {"Yes" if prediction[0] == 1 else "No"}')
+st.write(f'Predicción de la aceptación del depósito: {"Yes" if prediction[0] == 1 else "No"}')
 
