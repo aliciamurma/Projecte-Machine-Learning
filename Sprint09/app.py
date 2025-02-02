@@ -55,9 +55,10 @@ def convert_back_to_labels(arr):
 input_decoded = convert_back_to_labels(input_encoded.flatten())  # Convertimos los valores
 st.write("Input después de decodificar:", input_decoded)
 
+prediction = model.predict(input_decoded)
 
 # Realizar la predicción
-prediction = model.predict(input_encoded)
+#prediction = model.predict(input_encoded)
 
 # Mostrar la predicción
 st.write(f'Predicción del aceptación del depósito: {prediction[0]:.2f}')
