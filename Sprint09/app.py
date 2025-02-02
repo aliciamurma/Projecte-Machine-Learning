@@ -51,9 +51,12 @@ input_encoded = encoder.transform(input_data_categorical)
 # Convertir a un formato numérico para el modelo
 input_encoded = np.array(input_encoded).reshape(1, -1)
 
-# Imprimir las formas de las matrices
-st.write(f"Dimensiones de input_encoded: {input_encoded.shape}")
-st.write(f"Dimensiones de input_data_continuous: {input_data_continuous.shape}")
+
+# Concatenar las matrices, agregando 'housing_binary' directamente
+input_final = np.hstack((input_encoded, input_data_continuous))
+
+# Imprimir la forma final después de la concatenación
+st.write(f"Dimensiones de input_final después de la concatenación: {input_final.shape}")
 
 
 # Concatenar la variable 'housing' que no ha pasado por el encoder con las variables codificadas
