@@ -26,6 +26,13 @@ st.write(f"Contact: {_contact}")
 st.write(f"Month: {_month}")
 
 #Hacemos los mismos cambios que hicimos para entrenar el modelo
+#Ojo que mes lo tenemos como estaciones
+mes_a_estacion = {
+    'Jan': 'Winter', 'Feb': 'Winter', 'Dec': 'Winter',
+    'Mar': 'Spring', 'Apr': 'Spring', 'May': 'Spring',
+    'Jun': 'Summer', 'Jul': 'Summer', 'Aug': 'Summer',
+    'Sep': 'Autum', 'Oct': 'Autum', 'Nov': 'Autum'
+}
 _season = mes_a_estacion[_month]
 
 # Cargar el OneHotEncoder entrenado (guárdalo en un archivo .pkl cuando entrenes tu modelo)
