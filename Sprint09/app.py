@@ -21,13 +21,6 @@ _housing = st.radio("Do you have a house loan?", ["yes", "no"])
 _contact = st.selectbox("By what means did they contact you?", ["unknown", "telephone", "cellular"])
 _month = st.selectbox("In what month was the contact?", ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"])
 
-# Mostrar los valores seleccionados
-st.write("Selected Values:")
-st.write(f"Poutcome: {_poutcome}")
-st.write(f"Housing: {_housing}")
-st.write(f"Contact: {_contact}")
-st.write(f"Month: {_month}")
-
 #Hacemos los mismos cambios que hicimos para entrenar el modelo
 #Ojo que mes lo tenemos como estaciones
 mes_a_estacion = {
@@ -53,9 +46,6 @@ input_encoded = np.array(input_encoded).reshape(1, -1)
 
 # Concatenar las matrices agregando 'housing_binary' directamente. Si no se hace así, habrá problemas de tamaño de matriz diferente
 input_final = np.hstack((input_encoded, input_data_continuous))
-
-# Imprimir la forma final después de la concatenación
-st.write(f"Dimensiones de input_final después de la concatenación: {input_final.shape}")
 
 # Realizar la predicción
 prediction = model.predict(input_final)
