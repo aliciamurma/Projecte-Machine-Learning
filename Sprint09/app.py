@@ -7,7 +7,7 @@ import numpy as np
 with open('model.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
 
-with open('scaler.pkl', 'rb') as scaler_file:
+with open('encoder.pkl', 'rb') as scaler_file:
     scaler = pickle.load(scaler_file)
 
 # Título de la aplicación
@@ -48,18 +48,8 @@ input_encoded = encoder.transform(input_data)
 # Convertir a un formato numérico para el modelo
 input_encoded = np.array(input_encoded).reshape(1, -1)
 
-# Mostrar resultados codificados
-st.write("Categorical features transformed:", input_encoded)
-
-# Crear un DataFrame con las entradas
-user_data = pd.DataFrame({
-    'Length of Membership': [length_of_membership],
-    'Time on App': [time_on_app],
-    'Avg. Session Length': [avg_session_length]
-})
-
 # Realizar la predicción
-prediction = model.predict(user_data)
+prediction = model.predict(input_encoded)
 
 # Mostrar la predicción
 st.write(f'Predicción del aceptación del depósito: {prediction[0]:.2f}')
