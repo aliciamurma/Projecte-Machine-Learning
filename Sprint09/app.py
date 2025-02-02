@@ -53,6 +53,8 @@ input_encoded = np.array(input_encoded).reshape(1, -1)
 def convert_back_to_labels(arr):
     return ['yes' if x == 1 else 'no' for x in arr]
 
+print("Número de columnas en input_encoded:", input_encoded.shape[1])
+
 # Realizar la predicción
 prediction = model.predict(input_encoded)
 
