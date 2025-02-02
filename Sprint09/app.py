@@ -8,8 +8,9 @@ import joblib
 with open('model.pkl', 'rb') as model_file:
     model = joblib.load(model_file)  
 
-with open('encoder.pkl', 'rb') as scaler_file:
-    scaler = pickle.load(scaler_file)
+# Cargar el OneHotEncoder entrenado
+with open("scaler.pkl", "rb") as f:
+    encoder = pickle.load(f)
 
 # Título de la aplicación
 st.title('Predicción de posibilidad de aceptar un depósito en un banco')
@@ -37,27 +38,29 @@ mes_a_estacion = {
 }
 _season = mes_a_estacion[_month]
 
-# Cargar el OneHotEncoder entrenado (guárdalo en un archivo .pkl cuando entrenes tu modelo)
-with open("scaler.pkl", "rb") as f:
-    encoder = pickle.load(f)
+# Convertir la variable 'housing' de 'yes'/'no' a 1/0
+housing_binary = 1 if _housing == 'yes' else 0
 
-input_data = pd.DataFrame([[ _contact, _housing, _season, _poutcome ]], columns=['contact', 'housing', 'month', 'poutcome'])
+# Separar las variables que deben ser codificadas de las que no deben serlo
+input_data_categorical = pd.DataFrame([[ _contact, _season, _poutcome ]], columns=['contact', 'month', 'poutcome'])
+input_data_continuous = pd.DataFrame([[ _housing ]], columns=['housing'])
 
-# Aplicar OneHotEncoding a los datos de entrada
-input_encoded = encoder.transform(input_data)
+# Aplicar OneHotEncoding solo a las variables categóricas
+input_encoded = encoder.transform(input_data_categorical)
 
 # Convertir a un formato numérico para el modelo
 input_encoded = np.array(input_encoded).reshape(1, -1)
+
+# Concatenar la variable 'housing' que no ha pasado por el encoder con las variables codificadas
+input_final = np.hstack((input_encoded, input_data_continuous))
 
 # La variable objetivo está en bool
 def convert_back_to_labels(arr):
     return ['yes' if x == 1 else 'no' for x in arr]
 
-print("Número de columnas en input_encoded:", input_encoded.shape[1])
-
 # Realizar la predicción
-prediction = model.predict(input_encoded)
+prediction = model.predict(input_final)
 
 # Mostrar la predicción
-st.write(f'Predicción del aceptación del depósito: {prediction[0]:.2f}')
+st.write(f'Predicción de la aceptación del depósito: {"Yes" if prediction[0] == 1 else "No"}')
 
