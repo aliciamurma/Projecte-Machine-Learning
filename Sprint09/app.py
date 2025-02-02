@@ -39,11 +39,11 @@ mes_a_estacion = {
 _season = mes_a_estacion[_month]
 
 # Convertir la variable 'housing' de 'yes'/'no' a 1/0
-housing_binary = 1 if _housing == 'yes' else 0
+_housing_binary = 1 if _housing == 'yes' else 0
 
 # Separar las variables que deben ser codificadas de las que no deben serlo
 input_data_categorical = pd.DataFrame([[ _contact, _season, _poutcome ]], columns=['contact', 'month', 'poutcome'])
-input_data_continuous = pd.DataFrame([[ _housing ]], columns=['housing'])
+input_data_continuous = pd.DataFrame([[ _housing_binary ]], columns=['housing'])
 
 # Aplicar OneHotEncoding solo a las variables categóricas
 input_encoded = encoder.transform(input_data_categorical)
