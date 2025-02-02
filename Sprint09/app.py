@@ -41,7 +41,7 @@ _season = mes_a_estacion[_month]
 with open("scaler.pkl", "rb") as f:
     encoder = pickle.load(f)
 
-input_data = pd.DataFrame([[ _contact, _season, _poutcome ]], columns=['contact', 'housing', 'month', 'poutcome'])
+input_data = pd.DataFrame([[ _contact, _housing, _season, _poutcome ]], columns=['contact', 'housing', 'month', 'poutcome'])
 
 # Aplicar OneHotEncoding a los datos de entrada
 input_encoded = encoder.transform(input_data)
