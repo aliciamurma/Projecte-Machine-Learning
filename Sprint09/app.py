@@ -29,7 +29,7 @@ st.write(f"Month: {_month}")
 _season = mes_a_estacion[_month]
 
 # Cargar el OneHotEncoder entrenado (guárdalo en un archivo .pkl cuando entrenes tu modelo)
-with open("encoder.pkl", "rb") as f:
+with open("scaler.pkl", "rb") as f:
     encoder = pickle.load(f)
 
 input_data = pd.DataFrame([[ _contact, _season, _poutcome ]], columns=['contact', 'month', 'poutcome'])
