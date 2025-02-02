@@ -52,10 +52,9 @@ input_encoded = np.array(input_encoded).reshape(1, -1)
 def convert_back_to_labels(arr):
     return ['yes' if x == 1 else 'no' for x in arr]
 
-input_decoded = convert_back_to_labels(input_encoded.flatten())  # Convertimos los valores
-st.write("Input después de decodificar:", input_decoded)
-
-prediction = model.predict(input_decoded)
+#input_decoded = convert_back_to_labels(input_encoded.flatten())  # Convertimos los valores
+#st.write("Input después de decodificar:", input_decoded)
+st.write("Input antes de decodificar:", input_encoded)
 
 # Realizar la predicción
 #prediction = model.predict(input_encoded)
