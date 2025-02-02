@@ -28,10 +28,10 @@ st.write(f"Month: {_month}")
 #Hacemos los mismos cambios que hicimos para entrenar el modelo
 #Ojo que mes lo tenemos como estaciones
 mes_a_estacion = {
-    'Jan': 'Winter', 'Feb': 'Winter', 'Dec': 'Winter',
-    'Mar': 'Spring', 'Apr': 'Spring', 'May': 'Spring',
-    'Jun': 'Summer', 'Jul': 'Summer', 'Aug': 'Summer',
-    'Sep': 'Autum', 'Oct': 'Autum', 'Nov': 'Autum'
+    'jan': 'Winter', 'feb': 'Winter', 'dec': 'Winter',
+    'mar': 'Spring', 'apr': 'Spring', 'may': 'Spring',
+    'jun': 'Summer', 'jul': 'Summer', 'aug': 'Summer',
+    'sep': 'Autum', 'oct': 'Autum', 'nov': 'Autum'
 }
 _season = mes_a_estacion[_month]
 
