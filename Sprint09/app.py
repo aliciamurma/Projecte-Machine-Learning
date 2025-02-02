@@ -2,10 +2,11 @@ import streamlit as st
 import pickle
 import pandas as pd
 import numpy as np
+import joblib
 
-# Cargar el modelo y el escalador desde archivos
+# Cargar el modelo con joblib
 with open('model.pkl', 'rb') as model_file:
-    model = pickle.load(model_file)
+    model = joblib.load(model_file)  
 
 with open('encoder.pkl', 'rb') as scaler_file:
     scaler = pickle.load(scaler_file)
