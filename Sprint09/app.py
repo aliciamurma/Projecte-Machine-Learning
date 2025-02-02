@@ -48,6 +48,14 @@ input_encoded = encoder.transform(input_data)
 # Convertir a un formato numérico para el modelo
 input_encoded = np.array(input_encoded).reshape(1, -1)
 
+# La variable objetivo está en bool
+def convert_back_to_labels(arr):
+    return ['yes' if x == 1 else 'no' for x in arr]
+
+input_decoded = convert_back_to_labels(input_encoded.flatten())  # Convertimos los valores
+st.write("Input después de decodificar:", input_decoded)
+
+
 # Realizar la predicción
 prediction = model.predict(input_encoded)
 
